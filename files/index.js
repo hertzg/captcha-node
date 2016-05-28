@@ -3,10 +3,13 @@ function load () {
     request.open('get', 'get')
     request.send()
     request.onload = function () {
-        var response = JSON.parse(request.responseText)
-        tokenInput.value = response.token
-        image.src = response.image
+        setCaptcha(JSON.parse(request.responseText))
     }
+}
+
+function setCaptcha (captchaObject) {
+    tokenInput.value = captchaObject.token
+    image.src = captchaObject.image
 }
 
 var image = document.getElementById('image'),
@@ -30,7 +33,12 @@ verifyForm.addEventListener('submit', function (e) {
     request.send()
     request.onload = function () {
         var response = JSON.parse(request.responseText)
-        statusElement.innerHTML = response
+        if (response.error === 'INVALID_TOKEN') {
+            setCaptcha(response.newCaptcha)
+            statusElement.innerHTML = response.error
+        } else {
+            statusElement.innerHTML = response
+        }
     }
 
 })
