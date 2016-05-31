@@ -3,6 +3,7 @@ var http = require('http'),
 
 var config = require('./config.js'),
     Error404Page = require('./lib/Error404Page.js'),
+    Log = require('./lib/Log.js'),
     StaticPage = require('./lib/StaticPage.js')
 
 var tokens = Object.create(null)
@@ -16,7 +17,7 @@ pages['/index.css'] = StaticPage('files/index.css', 'text/css')
 pages['/index.js'] = StaticPage('files/index.js', 'application/javascript')
 
 http.createServer((req, res) => {
-    console.log((new Date).toISOString() + ' HTTP: ' + req.url)
+    Log.http(req.method + ' ' + req.url)
     var parsedUrl = url.parse(req.url, true)
     var page = pages[parsedUrl.pathname]
     if (page === undefined) page = Error404Page
