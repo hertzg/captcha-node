@@ -1,4 +1,4 @@
-exports.port = 7701
+exports.port = 7200
 exports.host = '127.0.0.1'
 
 exports.log = {
