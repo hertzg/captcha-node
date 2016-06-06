@@ -1,6 +1,6 @@
 function load () {
     var request = new XMLHttpRequest
-    request.open('get', 'get')
+    request.open('get', 'sessionNode/get')
     request.send()
     request.onload = function () {
         setCaptcha(JSON.parse(request.responseText))
@@ -25,7 +25,7 @@ verifyForm.addEventListener('submit', function (e) {
 
     e.preventDefault()
 
-    var url = 'verify?token=' + encodeURIComponent(tokenInput.value) +
+    var url = 'accountNode/verify?token=' + encodeURIComponent(tokenInput.value) +
         '&value=' + encodeURIComponent(valueInput.value)
 
     var request = new XMLHttpRequest

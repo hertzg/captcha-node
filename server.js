@@ -11,8 +11,8 @@ var issue = require('./lib/Issue.js')(tokens)
 
 var pages = Object.create(null)
 pages['/'] = require('./lib/IndexPage.js')
-pages['/get'] = require('./lib/GetPage.js')(issue)
-pages['/verify'] = require('./lib/VerifyPage.js')(issue, tokens)
+pages['/accountNode/verify'] = require('./lib/VerifyPage.js')(issue, tokens)
+pages['/frontNode/get'] = require('./lib/GetPage.js')(issue)
 pages['/index.css'] = StaticPage('files/index.css', 'text/css')
 pages['/index.js'] = StaticPage('files/index.js', 'application/javascript')
 
